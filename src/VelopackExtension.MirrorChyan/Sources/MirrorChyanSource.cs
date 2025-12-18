@@ -75,7 +75,7 @@ public class MirrorChyanSource(
         catch (Exception ex)
         {
             logger.Error($"Failed to get release feed from MirrorChyan: {ex.Message}");
-            return new() { Assets = [] };
+            throw;
         }
     }
 
