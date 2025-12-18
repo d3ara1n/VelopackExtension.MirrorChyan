@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <!-- NuGet Package Metadata -->
+        <PackageId>VelopackExtension.MirrorChyan</PackageId>
+        <Authors>d3ara1n</Authors>
+        <Company>d3ara1n</Company>
+        <Product>VelopackExtension.MirrorChyan</Product>
+        <Description>Unofficial extension for Velopack to support MirrorChyan.</Description>
+        <PackageTags>velopack;extension;mirrorchyan;mirror;chyan;</PackageTags>
+        <PackageProjectUrl>https://github.com/d3ara1n/VelopackExtension.MirrorChyan</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/d3ara1n/VelopackExtension.MirrorChyan</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <Title>MirrorChyan extension for Velopack</Title>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.1"/>
+        <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.1"/>
+        <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.1"/>
+        <PackageReference Include="MirrorChyan.Net" Version="1.0.0" />
+        <PackageReference Include="Velopack" Version="0.0.1298"/>
+    </ItemGroup>
+
+    <!-- Include files needed for NuGet packaging -->
+    <ItemGroup>
+        <None Include="Assets\icon.png" Pack="true" PackagePath="\" Condition="Exists('Assets\icon.png')"/>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+    <!-- Source Link for better debugging experience -->
+    <ItemGroup>
+        <PackageReference Include="GitVersion.MsBuild" Version="6.5.1">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="JetBrains.Annotations" Version="2025.2.4"/>
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+    </ItemGroup>
+
+</Project>
