@@ -62,7 +62,7 @@ public class MirrorChyanSource(
                                               : version.Version),
                 Type = version.Artifact.Kind == UpdateKind.Full ? VelopackAssetType.Full : VelopackAssetType.Delta,
                 FileName = fileName,
-                SHA256 = version.Artifact.Sha256.ToLower(),
+                SHA256 = version.Artifact.Sha256.ToUpper(),
                 Size = version.Artifact.FileSize,
                 NotesMarkdown = version.ReleaseNote
             };
