@@ -11,9 +11,8 @@ using VelopackExtension.MirrorChyan.Exceptions;
 namespace VelopackExtension.MirrorChyan.Sources;
 
 /// <summary>
-/// MirrorChyan 更新源，实现 Velopack 的 IUpdateSource 接口
-///
-/// Remark: 由于 Velopack 的增量包要求每个版本都有增量+最新版本有全量文件，而 MirrorChyan 无法实现最新版本没有获取相邻版本之间的增量版本集合能力，因此无法实现增量更新。
+///     MirrorChyan 更新源，实现 Velopack 的 IUpdateSource 接口
+///     Remark: 由于 Velopack 的增量包要求每个版本都有增量+最新版本有全量文件，而 MirrorChyan 无法实现最新版本没有获取相邻版本之间的增量版本集合能力，因此无法实现增量更新。
 /// </summary>
 public class MirrorChyanSource(
     IMirrorChyanService mirrorChyanService,
@@ -24,6 +23,8 @@ public class MirrorChyanSource(
     // 缓存下载 URL，因为 VelopackAsset 没有自定义属性存储 URL
     // Velopack 的设计限制导致需要这个中间变量
     private readonly ConcurrentDictionary<string, VersionModel> _downloadUrls = new();
+
+    #region IUpdateSource Members
 
     /// <inheritdoc />
     public async Task<VelopackAssetFeed> GetReleaseFeed(
@@ -42,7 +43,9 @@ public class MirrorChyanSource(
                 await mirrorChyanService.GetLatestVersionAsync(currentSourceOptions.Cdk, currentSourceOptions.Channel);
 
             if (version.Artifact is null)
+            {
                 throw new ResourceNotDownloadableException("Resource is not available. Maybe cdk is not provided.");
+            }
 
             // 文件名 包名+版本+os+arch.nupkg 拼接
             var packageId = appId ?? currentMirrorChyanOptions.ProductId;
@@ -108,8 +111,8 @@ public class MirrorChyanSource(
                                                     FileMode.Create,
                                                     FileAccess.Write,
                                                     FileShare.None,
-                                                    bufferSize: 81920,
-                                                    useAsync: true);
+                                                    81920,
+                                                    true);
 
         var buffer = new byte[81920];
         var totalBytesRead = 0L;
@@ -131,8 +134,10 @@ public class MirrorChyanSource(
         logger.Info($"Download completed: {localFile}");
     }
 
+    #endregion
+
     /// <summary>
-    /// 构建文件名: {PackageId}-{Version}-{Os}-{Arch}[-full|-delta].nupkg
+    ///     构建文件名: {PackageId}-{Version}-{Os}-{Arch}[-full|-delta].nupkg
     /// </summary>
     private static string BuildFileName(string packageId, string version, string os, string arch, UpdateKind kind)
     {
