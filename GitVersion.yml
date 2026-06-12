@@ -2,6 +2,7 @@ workflow: GitHubFlow/v1
 strategies:
     - ConfiguredNextVersion
     - Mainline
+label: null
 # Conventional Commits: any type with !: suffix or BREAKING CHANGE body → major
 major-version-bump-message: "^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\\([\\w\\s-,/\\\\]*\\))?(!:|:.*\\n\\n((.+\\n)+\\n)?BREAKING CHANGE:\\s.+)"
 # feat → minor
@@ -10,6 +11,5 @@ minor-version-bump-message: "^(feat)(\\([\\w\\s-,/\\\\]*\\))?:"
 patch-version-bump-message: "^(fix|perf|refactor)(\\([\\w\\s-,/\\\\]*\\))?:"
 branches:
     main:
-        label: ''
+        label: null
         increment: None
-        is-release-branch: true
