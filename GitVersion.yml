@@ -1,4 +1,10 @@
-mode: ContinuousDelivery
+mode: Mainline
+# Conventional Commits: any type with !: suffix or BREAKING CHANGE body → major
+major-version-bump-message: "^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\\([\\w\\s-,/\\\\]*\\))?(!:|:.*\\n\\n((.+\\n)+\\n)?BREAKING CHANGE:\\s.+)"
+# feat → minor
+minor-version-bump-message: "^(feat)(\\([\\w\\s-,/\\\\]*\\))?:"
+# fix, perf, refactor → patch
+patch-version-bump-message: "^(fix|perf|refactor)(\\([\\w\\s-,/\\\\]*\\))?:"
 branches:
     main:
         regex: ^master$

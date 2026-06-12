@@ -2,7 +2,6 @@ using System.Collections.Concurrent;
 using Microsoft.Extensions.Options;
 using MirrorChyan.Net.Models;
 using MirrorChyan.Net.Services;
-using NuGet.Versioning;
 using Velopack;
 using Velopack.Logging;
 using Velopack.Sources;
